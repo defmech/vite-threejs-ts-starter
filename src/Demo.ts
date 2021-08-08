@@ -19,6 +19,7 @@ export default class Demo {
 	constructor() {
 		this.initScene();
 		this.initStats();
+		this.initListeners();
 	}
 
 	initStats() {
@@ -86,6 +87,32 @@ export default class Demo {
 
 		// Init animation
 		this.animate();
+	}
+
+	initListeners() {
+		window.addEventListener('keydown', (event) => {
+			const { key } = event;
+
+			switch (key) {
+				case 'e':
+					const win = window.open('', 'Canvas Image');
+
+					const { domElement } = this.renderer;
+
+					// Makse sure scene is rendered.
+					this.renderer.render(this.scene, this.camera);
+
+					const src = domElement.toDataURL();
+
+					if (!win) return;
+
+					win.document.write(`<img src='${src}' width='${domElement.width}' height='${domElement.height}'>`);
+					break;
+
+				default:
+					break;
+			}
+		});
 	}
 
 	animate() {
