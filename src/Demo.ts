@@ -69,8 +69,7 @@ export default class Demo {
 		this.lightPoint.shadow.camera.far = cameraFar;
 
 		// Add a cube
-		// const geometryBox = new THREE.BoxGeometry();
-		const geometryBox = new THREE.TorusKnotGeometry(0.75, 0.2, 100, 16);
+		const geometryBox = new THREE.BoxGeometry();
 		const materialBox = new THREE.MeshPhongMaterial({ color: 0x00ff00 });
 		this.cube = new THREE.Mesh(geometryBox, materialBox);
 		this.cube.castShadow = true;
