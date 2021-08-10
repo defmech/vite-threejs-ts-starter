@@ -15,3 +15,9 @@ Install dependencies.
 
 Start development server.
 `npm run start`
+
+## Alternate Demos
+
+Toggle commented out code in `main.ts` to run the `Shader.ts` demo. Based on the `THREE.js` example from  [Book Of Shaders](https://thebookofshaders.com/04/).
+
+<img src="https://github.com/defmech/vite-threejs-ts-starter/blob/main/resources/shader_1.png?raw=true" width="512" height="512">
