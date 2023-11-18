@@ -219,32 +219,46 @@ clearcoatRoughness
 		// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 		// Add a cube
 
-		const geometryHero = new THREE.TorusKnotGeometry(0.75, 0.25, 100, 16);
-		const materialHero = new THREE.MeshPhysicalMaterial(configHero);
+		const materialOne = new THREE.MeshPhysicalMaterial(configHero);
+		// materialOne.color.convertSRGBToLinear();
 
-		materialHero.color.convertSRGBToLinear();
+		// const textureName = 'Concrete_Blocks_011';
+		// const textureName = 'Concrete_Wall_011';
+		// const textureName = 'Abstract_Organic_005';
+		// const textureName = 'Wood_Crate_001';
+		// const textureName = 'Glass_Vintage_001';
+		// const textureName = 'Ice_002';
+		const textureName = 'Encrusted_Gems_002';
 
-		this.hero = new THREE.Mesh(geometryHero, materialHero);
-		this.hero.castShadow = true;
-		this.scene.add(this.hero);
-
-		// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-		// Add a plane
-
-		const textureName = 'Concrete_Blocks_011';
+		const textureWrap = new THREE.Vector2(1, 1);
 
 		const textureDifusse = new THREE.TextureLoader().load(`./textures/${textureName}_SD/${textureName}_basecolor.jpg`);
+		textureDifusse.wrapS = THREE.RepeatWrapping;
+		textureDifusse.wrapT = THREE.RepeatWrapping;
+		textureDifusse.repeat.set(textureWrap.x, textureWrap.y);
 
 		const textureHeight = new THREE.TextureLoader().load(`./textures/${textureName}_SD/${textureName}_height.png`); // !!! PNG
+		textureHeight.wrapS = THREE.RepeatWrapping;
+		textureHeight.wrapT = THREE.RepeatWrapping;
+		textureHeight.repeat.set(textureWrap.x, textureWrap.y);
 
 		const textureNormal = new THREE.TextureLoader().load(`./textures/${textureName}_SD/${textureName}_normal.jpg`);
+		textureNormal.wrapS = THREE.RepeatWrapping;
+		textureNormal.wrapT = THREE.RepeatWrapping;
+		textureNormal.repeat.set(textureWrap.x, textureWrap.y);
 
 		const textureRoughness = new THREE.TextureLoader().load(`./textures/${textureName}_SD/${textureName}_roughness.jpg`);
+		textureRoughness.wrapS = THREE.RepeatWrapping;
+		textureRoughness.wrapT = THREE.RepeatWrapping;
+		textureRoughness.repeat.set(textureWrap.x, textureWrap.y);
 
 		const textureAO = new THREE.TextureLoader().load(`./textures/${textureName}_SD/${textureName}_ambientOcclusion.jpg`);
+		textureAO.wrapS = THREE.RepeatWrapping;
+		textureAO.wrapT = THREE.RepeatWrapping;
+		textureAO.repeat.set(textureWrap.x, textureWrap.y);
 
 		const geometryPlane = new THREE.PlaneBufferGeometry(6, 6, 1, 1);
-		const materialPlane = new THREE.MeshPhysicalMaterial({
+		const materialTwo = new THREE.MeshPhysicalMaterial({
 			color: 0x666666,
 			map: textureDifusse,
 			bumpMap: textureHeight,
@@ -252,9 +266,19 @@ clearcoatRoughness
 			roughnessMap: textureRoughness,
 			aoMap: textureAO,
 		});
-		materialPlane.color.convertSRGBToLinear();
+		// materialTwo.color.convertSRGBToLinear();
 
-		this.plane = new THREE.Mesh(geometryPlane, materialPlane);
+		// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+		const geometryHero = new THREE.TorusKnotGeometry(0.75, 0.25, 100, 16);
+		this.hero = new THREE.Mesh(geometryHero, materialOne);
+		this.hero.castShadow = true;
+		this.scene.add(this.hero);
+
+		// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		// Add a plane
+
+		this.plane = new THREE.Mesh(geometryPlane, materialTwo);
 		this.plane.position.z = -2;
 		this.plane.receiveShadow = true;
 		this.scene.add(this.plane);
